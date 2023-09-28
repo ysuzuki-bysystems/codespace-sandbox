@@ -17,5 +17,8 @@
     },
     "ghcr.io/devcontainers/features/github-cli:1": {
     }
+  },
+  "onCreateCommand": {
+    "tailscale": "curl -fsSL https://tailscale.com/install.sh | sh"
   }
 }

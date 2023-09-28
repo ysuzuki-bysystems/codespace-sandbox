@@ -5,11 +5,14 @@ services:
     command:
       - sleep
       - inf
+    volumes:
+      - type: volume
+        source: tailscale
+        target: /var/run/tailscale
 
   ping:
     image: mcr.microsoft.com/devcontainers/base:bookworm
-    volumes_from:
-      - dev
+    init: true
     command:
       - sh
       - -c
@@ -19,5 +22,22 @@ services:
         source: ../log
         target: /log
 
+  tailscale:
+    image: tailscale/tailscale:latest
+    network_mode: service:ping
+    volumes:
+      - type: volume
+        source: tailscale
+        target: /var/run/tailscale
+    devices:
+      - /dev/net/tun
+    init: true
+    privileged: true
+    command:
+      - tailscaled
+#     - -tun=userspace-networking
+      - '-state=mem:'
+
 volumes:
   log:
+  tailscale:
