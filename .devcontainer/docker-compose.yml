@@ -1,0 +1,23 @@
+services:
+  dev:
+    image: mcr.microsoft.com/devcontainers/javascript-node:20-bookworm
+    init: true
+    command:
+      - sleep
+      - inf
+
+  ping:
+    image: mcr.microsoft.com/devcontainers/base:bookworm
+    volumes_from:
+      - dev
+    command:
+      - sh
+      - -c
+      - 'while sleep 5; do date; curl -s checkip.amazonaws.com; done | tee -a /log/log'
+    volumes:
+      - type: bind
+        source: ../log
+        target: /log
+
+volumes:
+  log:
