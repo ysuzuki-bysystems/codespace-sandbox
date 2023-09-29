@@ -24,7 +24,7 @@ services:
 
   tailscale:
     image: tailscale/tailscale:latest
-    network_mode: service:ping
+    network_mode: host
     volumes:
       - type: volume
         source: tailscale
