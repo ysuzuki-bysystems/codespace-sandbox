@@ -30,7 +30,7 @@ services:
       - -c
       - 'echo $TEST_ENV'
     environment:
-      - TEST_ENV=${TEST_ENV:unset}
+      - TEST_ENV=${TEST_ENV:-unset}
     volumes:
       - type: bind
         source: ../log
