@@ -28,7 +28,7 @@ services:
     command:
       - sh
       - -c
-      - 'echo $$TEST_ENV'
+      - 'echo $$TEST_ENV > /log/env'
     environment:
       - TEST_ENV=${TEST_ENV:-unset}
     volumes:
