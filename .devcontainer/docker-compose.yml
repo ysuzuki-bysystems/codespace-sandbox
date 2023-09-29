@@ -31,6 +31,7 @@ services:
       - 'echo $$TEST_ENV > /log/env'
     environment:
       - TEST_ENV=${TEST_ENV:-unset}
+      - TEST_ENV2=${TEST_ENV2-}
     volumes:
       - type: bind
         source: ../log
