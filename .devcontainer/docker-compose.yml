@@ -22,9 +22,23 @@ services:
         source: ../log
         target: /log
 
+  echo:
+    image: mcr.microsoft.com/devcontainers/base:bookworm
+    init: true
+    command:
+      - sh
+      - -c
+      - 'echo $TEST_ENV'
+    environment:
+      - TEST_ENV=${TEST_ENV:unset}
+    volumes:
+      - type: bind
+        source: ../log
+        target: /log
+
   tailscale:
     image: tailscale/tailscale:latest
-    network_mode: host
+    network_mode: service:ping
     volumes:
       - type: volume
         source: tailscale
